@@ -1,10 +1,30 @@
-name = "60s"
+name = "60s-api"
 main = "cf-worker.ts"
 compatibility_date = "2025-01-15"
 compatibility_flags = [ "nodejs_compat_v2" ]
 
+# ✅ 强制使用 pnpm 安装依赖（避免默认跑 bun）
 [build]
-command = "bun install && bun run build"   # 👈 去掉 --frozen-lockfile，允许更新 lockfile
+command = "pnpm install --frozen-lockfile && pnpm run build"
 
-[observability.logs]
-enabled = true
+[observability]
+logs = { enabled = true }
+
+# ✅ 可选：环境变量
+[vars]
+NODE_ENV = "production"
+API_NAME = "60s-api"
+
+# ✅ 绑定 KV / D1 / R2 如果需要
+# [[kv_namespaces]]
+# binding = "KV_NAMESPACE"
+# id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "60s-db"
+# database_id = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+
+# [[r2_buckets]]
+# binding = "BUCKET"
+# bucket_name = "60s-bucket"
