@@ -3,5 +3,8 @@ main = "cf-worker.ts"
 compatibility_date = "2025-01-15"
 compatibility_flags = [ "nodejs_compat_v2" ]
 
+[build]
+command = "bun install && bun run build"   # 👈 去掉 --frozen-lockfile，允许更新 lockfile
+
 [observability.logs]
 enabled = true
